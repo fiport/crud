@@ -3,7 +3,7 @@
         <div class="container-fluid mt-5">
             <div class="row">
                 <div class="form-group col-md-12 text-right">
-                    <a type="button" href="/novo-agendamento" class="btn btn-warning">+ Novo</a>
+                    <a type="button" href="/new-scheduling" class="btn btn-warning">+ Novo</a>
                 </div>
             </div>
             <table class="table table-hover table-dark">
@@ -20,21 +20,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="a in agendamento">
-                        <th scope="row">{{a.id}}</th>
-                        <td>{{a.inputName}}</td>
-                        <td>{{a.inputNumber}}</td>
-                        <td>{{a.inputEmail}}</td>
-                        <td>{{a.inputEndereco}}</td>
-                        <td>{{a.intpuN}}</td>
-                        <td>{{a.inputCEP}}</td>
+                    <tr v-for="s in scheduling">
+                        <th scope="row">{{s.id}}</th>
+                        <td>{{s.input_name}}</td>
+                        <td>{{s.input_number}}</td>
+                        <td>{{s.input_email}}</td>
+                        <td>{{s.input_address}}</td>
+                        <td>{{s.intpu_n}}</td>
+                        <td>{{s.input_cep}}</td>
                         <td>
-                            <a class="btn btn-primary" @click="abreModal(a)">Editar</a>
+                            <a class="btn btn-primary" @click="openModal(s)">Editar</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <modal-agenda :data="agendaSelecionada"></modal-agenda>
+            <modal-agenda :data="scheduleSelect"></modal-agenda>
         </div>
     </div>
 </template>
@@ -51,32 +51,32 @@ export default {
 
     data() {
         return {
-            agendamento: [],
-            agendaSelecionada: []
+            scheduling: [],
+            scheduleSelect: []
         }
     },
 
     methods:{
 
-      getAgendamentos: function() {
+      getScheduling: function() {
         var $this = this;
 
-        axios.get('get-agendamentos')
+        axios.get('get-scheduling')
         .then(function(response) {
-            $this.agendamento = response.data;
+            $this.scheduling = response.data;
         })
     },
 
-    abreModal: function (agenda) {
+    openModal: function (schedule) {
         var $this = this;
-        this.agendaSelecionada = agenda;
-        $('#editAgenda').modal('show');
+        this.scheduleSelect = schedule;
+        $('#editSchedule').modal('show');
     },
 
   },
 
   mounted () {
-    this.getAgendamentos();
+    this.getScheduling();
   },
 
 }

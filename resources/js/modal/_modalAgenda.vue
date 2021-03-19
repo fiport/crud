@@ -1,66 +1,66 @@
 <template>
     <div>
         <div class="container mt-5">
-            <div class="modal fade" id="editAgenda" tabindex="-1" role="dialog" aria-labelledby="editAgenda" aria-hidden="true">
+            <div class="modal fade" id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="editSchedule" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background: #212529; color: white;">
-                            <h5 class="modal-title" id="editAgenda">Editar Agenda</h5>
+                            <h5 class="modal-title" id="editSchedule1">Editar Agenda</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                        <form @submit.prevent="editAgendamento" id="formEdit">
+                        <form @submit.prevent="editScheduling" id="formEdit">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="inputName">Nome completo</label>
-                                        <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Nome completo" :value="data.inputName">
+                                        <label for="input_name">Nome completo</label>
+                                        <input type="text" class="form-control" name="input_name" id="input_name" placeholder="Nome completo" :value="data.input_name">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputNumber">Tel/Cel</label>
-                                        <input type="tel" class="form-control" name="inputNumber" id="inputNumber" :value="data.inputNumber">
+                                        <label for="input_number">Tel/Cel</label>
+                                        <input type="tel" class="form-control" name="input_number" id="input_number" :value="data.input_number">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputEmail">E-mail</label>
-                                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="E-mail" :value="data.inputEmail">
+                                        <label for="input_email">E-mail</label>
+                                        <input type="email" class="form-control" name="input_email" id="input_email" placeholder="E-mail" :value="data.input_email">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-2">
-                                        <label for="inputCEP">CEP</label>
-                                        <input type="text" class="form-control"  name="inputCEP" id="inputCEP"  :value="data.inputCEP">
+                                        <label for="input_cep">CEP</label>
+                                        <input type="text" class="form-control"  name="input_cep" id="input_cep"  :value="data.input_cep">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="intpuN">Nº</label>
-                                        <input type="number" class="form-control" name="intpuN" id="intpuN" :value="data.intpuN">
+                                        <label for="intpu_n">Nº</label>
+                                        <input type="number" class="form-control" name="intpu_n" id="intpu_n" :value="data.intpu_n">
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <label for="inputEndereco">Endereço</label>
-                                        <input type="text" class="form-control" name="inputEndereco" id="inputEndereco" :value="data.inputEndereco"  >
+                                        <label for="input_address">Endereço</label>
+                                        <input type="text" class="form-control" name="input_address" id="input_address" :value="data.input_address"  >
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="inputCity">Cidade</label>
-                                        <input type="text" class="form-control" name="inputCity" id="inputCity" :value="data.inputCity" >
+                                        <label for="input_city">Cidade</label>
+                                        <input type="text" class="form-control" name="input_city" id="input_city" :value="data.input_city" >
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputBairro">Bairro</label>
-                                        <input type="text" class="form-control" name="inputBairro" id="inputBairro" :value="data.inputBairro" >
+                                        <label for="input_district">Bairro</label>
+                                        <input type="text" class="form-control" name="input_district" id="input_district" :value="data.input_district" >
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputEstado">Estado</label>
-                                        <input type="text" class="form-control" name="inputEstado" id="inputEstado" :value="data.inputEstado" >
+                                        <label for="input_state">Estado</label>
+                                        <input type="text" class="form-control" name="input_state" id="input_state" :value="data.input_state" >
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12 text-right">
-                                        <a type="button" class="btn btn-danger" data-dismiss="modal" @click="delAgenda">Excluir</a>
+                                        <a type="button" class="btn btn-danger" data-dismiss="modal" @click="delSchedule">Excluir</a>
                                         <button type="submit" class="btn btn-warning">Salvar Alteração</button>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ import Swal from 'sweetalert2'
 
 export default {
 
-    
+
     data() {
         return {
             data: [],
@@ -99,11 +99,11 @@ export default {
             this.getAddress();
         },
 
-        editAgendamento: function() {
+        editScheduling: function() {
             var formData = new FormData(document.getElementById('formEdit'));
             var id = this.data.id;
 
-            axios.post('edit-agendamento/' + id, formData)
+            axios.post('edit-scheduling/' + id, formData)
             .then(function(response){
 
                 if (response.data) {
@@ -120,10 +120,10 @@ export default {
             })
         },
 
-        delAgenda: function() {
+        delSchedule: function() {
             var id = this.data.id;
 
-            axios.put('del-agendamento/' + id)
+            axios.put('del-scheduling/' + id)
             .then(function(response){
 
                 if (response.data) {

@@ -6,7 +6,7 @@
                     <a type="button" href="/" class="btn btn-secondary">Voltar</a>
                 </div>
             </div>
-            <form @submit.prevent="storeAgendamento" id="formAddress">
+            <form @submit.prevent="storeScheduling" id="formAddress">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputName">Nome completo</label>
@@ -27,12 +27,12 @@
                         <input type="text" class="form-control"  name="inputCEP" id="inputCEP" required @change="fetchCep($event)" v-model="cep">
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="intpuN">Nº</label>
-                        <input type="number" class="form-control" name="intpuN" id="intpuN" required>
+                        <label for="inputN">Nº</label>
+                        <input type="number" class="form-control" name="inputN" id="inputN" required>
                     </div>
                     <div class="form-group col-md-8">
-                        <label for="inputEndereco">Endereço</label>
-                        <input type="text" class="form-control" name="inputEndereco" id="inputEndereco" :value="address.logradouro"  >
+                        <label for="inputAddress">Endereço</label>
+                        <input type="text" class="form-control" name="inputAddress" id="inputAddress" :value="address.logradouro"  >
                     </div>
                 </div>
                 <div class="form-row">
@@ -41,15 +41,15 @@
                         <input type="text" class="form-control" name="inputCity" id="inputCity" :value="address.localidade" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" name="inputBairro" id="inputBairro" :value="address.bairro" >
+                        <label for="inputDistrict">Bairro</label>
+                        <input type="text" class="form-control" name="inputDistrict" id="inputDistrict" :value="address.bairro" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inputEstado">Estado</label>
-                        <input type="text" class="form-control" name="inputEstado" id="inputEstado" :value="address.uf" >
+                        <label for="inputState">Estado</label>
+                        <input type="text" class="form-control" name="inputState" id="inputState" :value="address.uf" >
                     </div>
                 </div>
-                
+
                 <button type="submit" class="btn btn-warning">Salvar</button>
                 <button type="reset" class="btn btn-secondary">Limpar</button>
             </form>
@@ -64,7 +64,7 @@ import {TheMask} from 'vue-the-mask'
 export default {
 
     directives: {TheMask},
-    
+
     data() {
         return {
             cep: '',
@@ -83,7 +83,7 @@ export default {
         getAddress: function() {
 
             var $this = this;
-            
+
             axios.get('get-address/' + this.cep)
             .then(function(response){
 
@@ -92,11 +92,11 @@ export default {
             })
         },
 
-        storeAgendamento: function() {
-            
+        storeScheduling: function() {
+
             var formData = new FormData(document.getElementById("formAddress"));
 
-            axios.post('store-agendamento', formData)
+            axios.post('store-scheduling', formData)
             .then(function(response){
 
                 if (response.data) {

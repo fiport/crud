@@ -2089,9 +2089,9 @@ __webpack_require__.r(__webpack_exports__);
         $this.address = response.data.data;
       });
     },
-    storeAgendamento: function storeAgendamento() {
+    storeScheduling: function storeScheduling() {
       var formData = new FormData(document.getElementById("formAddress"));
-      axios.post('store-agendamento', formData).then(function (response) {
+      axios.post('store-scheduling', formData).then(function (response) {
         if (response.data) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Ótimo!', 'Cadastro realizado!', 'success');
           setTimeout(function () {
@@ -2207,10 +2207,10 @@ __webpack_require__.r(__webpack_exports__);
       this.cep = event.target.value;
       this.getAddress();
     },
-    editAgendamento: function editAgendamento() {
+    editScheduling: function editScheduling() {
       var formData = new FormData(document.getElementById('formEdit'));
       var id = this.data.id;
-      axios.post('edit-agendamento/' + id, formData).then(function (response) {
+      axios.post('edit-scheduling/' + id, formData).then(function (response) {
         if (response.data) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Ótimo!', 'Agendamento alterado com sucesso!', 'success');
           setTimeout(function () {
@@ -2219,9 +2219,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    delAgenda: function delAgenda() {
+    delSchedule: function delSchedule() {
       var id = this.data.id;
-      axios.put('del-agendamento/' + id).then(function (response) {
+      axios.put('del-scheduling/' + id).then(function (response) {
         if (response.data) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Ótimo!', 'Agendamento excluido com sucesso!', 'success');
           setTimeout(function () {
@@ -2293,25 +2293,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      agendamento: [],
-      agendaSelecionada: []
+      scheduling: [],
+      scheduleSelect: []
     };
   },
   methods: {
-    getAgendamentos: function getAgendamentos() {
+    getScheduling: function getScheduling() {
       var $this = this;
-      axios.get('get-agendamentos').then(function (response) {
-        $this.agendamento = response.data;
+      axios.get('get-scheduling').then(function (response) {
+        $this.scheduling = response.data;
       });
     },
-    abreModal: function abreModal(agenda) {
+    openModal: function openModal(schedule) {
       var $this = this;
-      this.agendaSelecionada = agenda;
-      $('#editAgenda').modal('show');
+      this.scheduleSelect = schedule;
+      $('#editSchedule').modal('show');
     }
   },
   mounted: function mounted() {
-    this.getAgendamentos();
+    this.getScheduling();
   }
 });
 
@@ -41646,7 +41646,7 @@ var staticRenderFns = [
             {
               staticClass: "navbar-brand",
               staticStyle: { "text-align": "center", cursor: "pointer" },
-              attrs: { href: "/agenda" }
+              attrs: { href: "/schedule" }
             },
             [
               _c("img", {
@@ -41722,7 +41722,7 @@ var render = function() {
           on: {
             submit: function($event) {
               $event.preventDefault()
-              return _vm.storeAgendamento($event)
+              return _vm.storeScheduling($event)
             }
           }
         },
@@ -41795,7 +41795,7 @@ var render = function() {
             _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-8" }, [
-              _c("label", { attrs: { for: "inputEndereco" } }, [
+              _c("label", { attrs: { for: "inputAddress" } }, [
                 _vm._v("Endereço")
               ]),
               _vm._v(" "),
@@ -41803,8 +41803,8 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "text",
-                  name: "inputEndereco",
-                  id: "inputEndereco"
+                  name: "inputAddress",
+                  id: "inputAddress"
                 },
                 domProps: { value: _vm.address.logradouro }
               })
@@ -41823,25 +41823,27 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-4" }, [
-              _c("label", { attrs: { for: "inputBairro" } }, [
+              _c("label", { attrs: { for: "inputDistrict" } }, [
                 _vm._v("Bairro")
               ]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "text", name: "inputBairro", id: "inputBairro" },
+                attrs: {
+                  type: "text",
+                  name: "inputDistrict",
+                  id: "inputDistrict"
+                },
                 domProps: { value: _vm.address.bairro }
               })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-4" }, [
-              _c("label", { attrs: { for: "inputEstado" } }, [
-                _vm._v("Estado")
-              ]),
+              _c("label", { attrs: { for: "inputState" } }, [_vm._v("Estado")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "text", name: "inputEstado", id: "inputEstado" },
+                attrs: { type: "text", name: "inputState", id: "inputState" },
                 domProps: { value: _vm.address.uf }
               })
             ])
@@ -41924,11 +41926,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-md-2" }, [
-      _c("label", { attrs: { for: "intpuN" } }, [_vm._v("Nº")]),
+      _c("label", { attrs: { for: "inputN" } }, [_vm._v("Nº")]),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "number", name: "intpuN", id: "intpuN", required: "" }
+        attrs: { type: "number", name: "inputN", id: "inputN", required: "" }
       })
     ])
   }
@@ -41961,10 +41963,10 @@ var render = function() {
         {
           staticClass: "modal fade",
           attrs: {
-            id: "editAgenda",
+            id: "editSchedule",
             tabindex: "-1",
             role: "dialog",
-            "aria-labelledby": "editAgenda",
+            "aria-labelledby": "editSchedule",
             "aria-hidden": "true"
           }
         },
@@ -41987,14 +41989,14 @@ var render = function() {
                       on: {
                         submit: function($event) {
                           $event.preventDefault()
-                          return _vm.editAgendamento($event)
+                          return _vm.editScheduling($event)
                         }
                       }
                     },
                     [
                       _c("div", { staticClass: "form-row" }, [
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputName" } }, [
+                          _c("label", { attrs: { for: "input_name" } }, [
                             _vm._v("Nome completo")
                           ]),
                           _vm._v(" "),
@@ -42002,16 +42004,16 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputName",
-                              id: "inputName",
+                              name: "input_name",
+                              id: "input_name",
                               placeholder: "Nome completo"
                             },
-                            domProps: { value: _vm.data.inputName }
+                            domProps: { value: _vm.data.input_name }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputNumber" } }, [
+                          _c("label", { attrs: { for: "input_number" } }, [
                             _vm._v("Tel/Cel")
                           ]),
                           _vm._v(" "),
@@ -42019,15 +42021,15 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "tel",
-                              name: "inputNumber",
-                              id: "inputNumber"
+                              name: "input_number",
+                              id: "input_number"
                             },
-                            domProps: { value: _vm.data.inputNumber }
+                            domProps: { value: _vm.data.input_number }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputEmail" } }, [
+                          _c("label", { attrs: { for: "input_email" } }, [
                             _vm._v("E-mail")
                           ]),
                           _vm._v(" "),
@@ -42035,18 +42037,18 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "email",
-                              name: "inputEmail",
-                              id: "inputEmail",
+                              name: "input_email",
+                              id: "input_email",
                               placeholder: "E-mail"
                             },
-                            domProps: { value: _vm.data.inputEmail }
+                            domProps: { value: _vm.data.input_email }
                           })
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-row" }, [
                         _c("div", { staticClass: "form-group col-md-2" }, [
-                          _c("label", { attrs: { for: "inputCEP" } }, [
+                          _c("label", { attrs: { for: "input_cep" } }, [
                             _vm._v("CEP")
                           ]),
                           _vm._v(" "),
@@ -42054,15 +42056,15 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputCEP",
-                              id: "inputCEP"
+                              name: "input_cep",
+                              id: "input_cep"
                             },
-                            domProps: { value: _vm.data.inputCEP }
+                            domProps: { value: _vm.data.input_cep }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-2" }, [
-                          _c("label", { attrs: { for: "intpuN" } }, [
+                          _c("label", { attrs: { for: "intpu_n" } }, [
                             _vm._v("Nº")
                           ]),
                           _vm._v(" "),
@@ -42070,15 +42072,15 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "number",
-                              name: "intpuN",
-                              id: "intpuN"
+                              name: "intpu_n",
+                              id: "intpu_n"
                             },
-                            domProps: { value: _vm.data.intpuN }
+                            domProps: { value: _vm.data.intpu_n }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-8" }, [
-                          _c("label", { attrs: { for: "inputEndereco" } }, [
+                          _c("label", { attrs: { for: "input_address" } }, [
                             _vm._v("Endereço")
                           ]),
                           _vm._v(" "),
@@ -42086,17 +42088,17 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputEndereco",
-                              id: "inputEndereco"
+                              name: "input_address",
+                              id: "input_address"
                             },
-                            domProps: { value: _vm.data.inputEndereco }
+                            domProps: { value: _vm.data.input_address }
                           })
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-row" }, [
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputCity" } }, [
+                          _c("label", { attrs: { for: "input_city" } }, [
                             _vm._v("Cidade")
                           ]),
                           _vm._v(" "),
@@ -42104,15 +42106,15 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputCity",
-                              id: "inputCity"
+                              name: "input_city",
+                              id: "input_city"
                             },
-                            domProps: { value: _vm.data.inputCity }
+                            domProps: { value: _vm.data.input_city }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputBairro" } }, [
+                          _c("label", { attrs: { for: "input_district" } }, [
                             _vm._v("Bairro")
                           ]),
                           _vm._v(" "),
@@ -42120,15 +42122,15 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputBairro",
-                              id: "inputBairro"
+                              name: "input_district",
+                              id: "input_district"
                             },
-                            domProps: { value: _vm.data.inputBairro }
+                            domProps: { value: _vm.data.input_district }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-4" }, [
-                          _c("label", { attrs: { for: "inputEstado" } }, [
+                          _c("label", { attrs: { for: "input_state" } }, [
                             _vm._v("Estado")
                           ]),
                           _vm._v(" "),
@@ -42136,10 +42138,10 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              name: "inputEstado",
-                              id: "inputEstado"
+                              name: "input_state",
+                              id: "input_state"
                             },
-                            domProps: { value: _vm.data.inputEstado }
+                            domProps: { value: _vm.data.input_state }
                           })
                         ])
                       ]),
@@ -42157,7 +42159,7 @@ var render = function() {
                                   type: "button",
                                   "data-dismiss": "modal"
                                 },
-                                on: { click: _vm.delAgenda }
+                                on: { click: _vm.delSchedule }
                               },
                               [_vm._v("Excluir")]
                             ),
@@ -42196,9 +42198,11 @@ var staticRenderFns = [
         staticStyle: { background: "#212529", color: "white" }
       },
       [
-        _c("h5", { staticClass: "modal-title", attrs: { id: "editAgenda" } }, [
-          _vm._v("Editar Agenda")
-        ]),
+        _c(
+          "h5",
+          { staticClass: "modal-title", attrs: { id: "editSchedule1" } },
+          [_vm._v("Editar Agenda")]
+        ),
         _vm._v(" "),
         _c(
           "button",
@@ -42249,21 +42253,21 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.agendamento, function(a) {
+            _vm._l(_vm.scheduling, function(s) {
               return _c("tr", [
-                _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(a.id))]),
+                _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(s.id))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.inputName))]),
+                _c("td", [_vm._v(_vm._s(s.input_name))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.inputNumber))]),
+                _c("td", [_vm._v(_vm._s(s.input_number))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.inputEmail))]),
+                _c("td", [_vm._v(_vm._s(s.input_email))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.inputEndereco))]),
+                _c("td", [_vm._v(_vm._s(s.input_address))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.intpuN))]),
+                _c("td", [_vm._v(_vm._s(s.intpu_n))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(a.inputCEP))]),
+                _c("td", [_vm._v(_vm._s(s.input_cep))]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -42272,7 +42276,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       on: {
                         click: function($event) {
-                          return _vm.abreModal(a)
+                          return _vm.openModal(s)
                         }
                       }
                     },
@@ -42285,7 +42289,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("modal-agenda", { attrs: { data: _vm.agendaSelecionada } })
+        _c("modal-agenda", { attrs: { data: _vm.scheduleSelect } })
       ],
       1
     )
@@ -42302,7 +42306,7 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "btn btn-warning",
-            attrs: { type: "button", href: "/novo-agendamento" }
+            attrs: { type: "button", href: "/new-scheduling" }
           },
           [_vm._v("+ Novo")]
         )
